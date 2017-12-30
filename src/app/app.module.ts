@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 
 import { AppComponent } from "./app.component";
 
@@ -14,8 +15,11 @@ export const firebaseConfig = environment.firebaseConfig;
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    FormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule
+    // AngularFirestoreModule.enablePersistence()
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

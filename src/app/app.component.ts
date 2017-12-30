@@ -20,16 +20,38 @@ interface Books {
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
-  
-  booksCollection : AngularFirestoreCollection<Books>;
-  books$ : Observable<Books[]>
+  booksCollection: AngularFirestoreCollection<Books>;
+  booksDocument: AngularFirestoreDocument<Books>;
+  booksRead$: Observable<Books[]>;
+  booksUpdate$: Observable<Books>;
+  public newName: string = "";
+  public newAuthor: string = "";
+  public snapShot: any;
 
   title = "app";
-  
+
   constructor(private angularfirestore: AngularFirestore) {}
 
   ngOnInit() {
-    this.booksCollection = this.angularfirestore.collection('books');
-    this.books$ = this.booksCollection.valueChanges();
+    //READ ALL
+
+    this.booksCollection = this.angularfirestore.collection("books");
+    this.booksRead$ = this.booksCollection.valueChanges();
+
+    // Update
+    // this.booksDocument = this.angularfirestore.doc(
+    //   "DOC NAME"
+    // );
+    this.booksUpdate$ = this.booksDocument.valueChanges();
+
+    // this.snapShot = this.booksCollection.snapshotChanges().map(arr => {
+    //   console.log(arr)
+    //   return arr.map(snap => {
+    //     snap.payload.doc.data();});
+    // });
+  }
+
+  updateName() {
+    this.booksDocument.update({ name: this.newName, author: this.newAuthor });
   }
 }

@@ -1,3 +1,10 @@
-<ng-container *ngFor= "let book of books$ | async">
-  {{ book | json }}
+<h2>List of All Books</h2>
+<ng-container *ngFor="let book of booksRead$ | async">
+  {{ book | json }} <br/>
 </ng-container>
+
+<h2>Update</h2>
+{{ booksUpdate$ | async | json }}<br/>
+Name: <input [(ngModel)]="newName"><br/>
+Author: <input [(ngModel)]="newAuthor"><br/>
+<button (click)="updateName()">Update</button>
