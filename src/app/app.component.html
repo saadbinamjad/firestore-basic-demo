@@ -1,16 +1,20 @@
-<h2>List of All Books</h2>
-<ng-container *ngFor="let book of booksRead$ | async">
-  {{ book | json }} <br/>
+<h1> {{ title }}</h1>
+<h2>List of All SuperHeroes</h2>
+
+<ng-container *ngFor="let hero of superHeroes | async ">
+  <ul style="cursor: pointer" (click)="getDetails(hero)">
+    <li>{{ hero | json }}</li>
+  </ul>
 </ng-container>
 
-<h2>Input</h2>
-ID: <input [(ngModel)]="formData.id"><br/>
-Name: <input [(ngModel)]="formData.name"><br/>
-Author: <input [(ngModel)]="formData.author"><br/>
-<button (click)="postBook()">Post</button>
+<ng-container *ngIf="!selectedHero">
+  <h2>Input</h2>
+  Name: <input [(ngModel)]="formData.name"><br/> Power: <input [(ngModel)]="formData.power"><br/>
+  <button (click)="postSuperHero()">Post</button>
+</ng-container>
 
-<h2>Update</h2>
-{{ booksUpdate$ | async | json }}<br/>
-Name: <input [(ngModel)]="newName"><br/>
-Author: <input [(ngModel)]="newAuthor"><br/>
-<button (click)="updateName()">Update</button>
+<ng-container *ngIf="selectedHero">
+  <h2>Update</h2> <br/> Name: <input [placeholder]="selectedHero.name" [(ngModel)]="formData.name"><br/> Power:
+  <input [placeholder]="selectedHero.power" [(ngModel)]="formData.power"><br/>
+  <button (click)="updateSuperHero()">Update</button>
+</ng-container>
