@@ -3,6 +3,12 @@
   {{ book | json }} <br/>
 </ng-container>
 
+<h2>Input</h2>
+ID: <input [(ngModel)]="formData.id"><br/>
+Name: <input [(ngModel)]="formData.name"><br/>
+Author: <input [(ngModel)]="formData.author"><br/>
+<button (click)="postBook()">Post</button>
+
 <h2>Update</h2>
 {{ booksUpdate$ | async | json }}<br/>
 Name: <input [(ngModel)]="newName"><br/>

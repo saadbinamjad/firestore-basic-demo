@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
   public newName: string = "";
   public newAuthor: string = "";
   public snapShot: any;
+  public formData: Books = { id: null, name: "", author: "" };
 
   title = "app";
 
@@ -39,9 +40,9 @@ export class AppComponent implements OnInit {
     this.booksRead$ = this.booksCollection.valueChanges();
 
     // Update
-    // this.booksDocument = this.angularfirestore.doc(
-    //   "DOC NAME"
-    // );
+    this.booksDocument = this.angularfirestore.doc(
+      "DOC NAME"
+    );
     this.booksUpdate$ = this.booksDocument.valueChanges();
 
     // this.snapShot = this.booksCollection.snapshotChanges().map(arr => {
@@ -53,5 +54,9 @@ export class AppComponent implements OnInit {
 
   updateName() {
     this.booksDocument.update({ name: this.newName, author: this.newAuthor });
+  }
+
+  postBook() {
+    this.booksCollection.add(this.formData);
   }
 }
